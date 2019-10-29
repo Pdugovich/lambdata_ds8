@@ -14,14 +14,18 @@ ZEROES = pd.DataFrame(np.zeros(50))
 
 #sample functions
 def increment(x):
-    """Add 1 to an integer"""
+    """
+    Add 1 to an integer
+    """
     return(x + 1)
 
 # fxn to split data into train, validation, and test sets
 def train_validation_test_split(
     X, y, train_size=0.7, val_size=0.1, test_size=0.2,
     random_state=None, shuffle=True):
-    """Given features(X) and target(y), split data into train, val, test sets"""
+    """
+    Given features(X) and target(y), split data into train, val, test sets
+    """
 
     assert train_size + val_size + test_size == 1
 
@@ -36,10 +40,16 @@ def train_validation_test_split(
 
 # function to 
 def print_nulls(DataFrame):
-    """ Given a dataframe, returns a dataframe with the number of nulls in each
-    column listed in descending order"""
+    """
+    Given a dataframe, returns a dataframe with the number of nulls in each
+    column listed in descending order
+    """
+    # Copies dataframe
     df_isnull = DataFrame.copy()
+    # Resets index of the sum of nulls for the dataframe
     df_isnull = pd.Series(df_isnull.isnull().sum()).reset_index()
+    # Renames columns
     df_isnull = df_isnull.rename(columns={'index': 'Column', 0: 'Number of Nulls'})
+    # Sorts by highest number of nulls
     df_isnull.sort_values(by='Number of Nulls', ascending=False)
     return print(df_isnull)
