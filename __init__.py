@@ -85,14 +85,17 @@ class Split:
         """
         Given features and target, splits data into train, test, and validation
         sets
+        
+        Must call the method as:
+        X_train, X_val, X_test, y_train, y_val, y_test = testing.train_test_validation_split()
         """
         assert self.train_size + self.val_size + self.test_size == 1
         X_train_val, X_test, y_train_val, y_test = train_test_split(
             self.X,
             self.y,
-            self.test_size,
-            self.random_state,
-            self.shuffle
+            test_size = self.test_size,
+            random_state = self.random_state,
+            shuffle = self.shuffle
             )
         X_train, X_val, y_train, y_val = train_test_split(
             X_train_val,
@@ -100,3 +103,4 @@ class Split:
             test_size=self.val_size / (self.train_size/self.val_size)
         )
         return X_train, X_val, X_test, y_train, y_val, y_test
+        
